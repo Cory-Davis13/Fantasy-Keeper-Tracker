@@ -31,14 +31,14 @@ const App = () => {
             <option default value="#">
               Select a Team
             </option>
-            <option default value="BillDaly">
-              Bill Daly
+            <option default value="Cory">
+              Cory
             </option>
-            <option default value="PopMachine">
-              Pop Machine
+            <option default value="Dan">
+              Dan
             </option>
-            <option default value="Heboshabs">
-              Hebos Habs
+            <option default value="Hebe">
+              Hebe
             </option>
           </select>
         </div>
