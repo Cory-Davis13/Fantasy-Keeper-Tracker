@@ -10,15 +10,27 @@
 
 table {
   background-color: #130a38;
-  border: 2px solid white;
+  border: 1px solid white;
   margin: 1rem;
   padding: 2rem;
+  border-collapse: collapse;
   border-radius: 10px;
   box-shadow: 15px 6px 6px 6px #1f1f1f;
   color: white;
   text-align: center;
 }
 
-th {
-  padding: 1.33rem;
+#keepers tr:nth-child(even) {
+  background-color: #211841;
+}
+
+#keepers th {
+  background-color: rgb(161, 148, 196);
+  color: black;
+}
+
+#keepers td,
+#keepers th {
+  border: 1px solid #ddd;
+  padding: 1rem;
 }

@@ -5,7 +5,7 @@ import "./KeeperTable.css";
 
 const KeeperTable = (props) => {
   const [playersList, setPlayersList] = useState([]);
-  const [url, setUrl] = useState("/getData/2021/Cory");
+  const [url, setUrl] = useState("/getData");
 
   useEffect(() => {
     if (props.yearSearch !== "" || props.teamSearch !== "") {
@@ -24,7 +24,7 @@ const KeeperTable = (props) => {
 
   return (
     <div className="flex">
-      <table>
+      <table id="keepers">
         <thead>
           <tr>
             <th key={uuidv4()}>Manager</th>
