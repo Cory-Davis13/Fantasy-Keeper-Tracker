@@ -5,12 +5,10 @@ import "./KeeperTable.css";
 
 const KeeperTable = (props) => {
   const [playersList, setPlayersList] = useState([]);
-  const [url, setUrl] = useState("/getData/2021/BillDaly");
-
-  let players = [];
+  const [url, setUrl] = useState("/getData/2021/Cory");
 
   useEffect(() => {
-    if (props.yearSearch != "" || props.teamSearch != "") {
+    if (props.yearSearch !== "" || props.teamSearch !== "") {
       setUrl("/getData/" + props.yearSearch + "/" + props.teamSearch);
     }
   }, [props.yearSearch, props.teamSearch]);
@@ -18,16 +16,7 @@ const KeeperTable = (props) => {
   useEffect(() => {
     async function getTeams() {
       axios.get(url).then((res) => {
-        res.data.map((e) =>
-          players.push({
-            name: e.player_name,
-            manager: e.manager,
-            year: e.Year,
-            retained: e.drafts_retained,
-            remaining: e.drafts_remaining,
-          })
-        );
-        setPlayersList(players);
+        setPlayersList(res.data);
       });
     }
     getTeams();
@@ -50,10 +39,14 @@ const KeeperTable = (props) => {
             return [
               <tr key={uuidv4()}>
                 <td key={uuidv4()}>{e.manager}</td>
-                <td key={uuidv4()}>{e.name}</td>
-                <td key={uuidv4()}>{e.year}</td>
-                <td key={uuidv4()}>{e.retained === null ? 0 : e.retained}</td>
-                <td key={uuidv4()}>{e.remaining === null ? 0 : e.remaining}</td>
+                <td key={uuidv4()}>{e.player_name}</td>
+                <td key={uuidv4()}>{e.Year}</td>
+                <td key={uuidv4()}>
+                  {e.drafts_retained === null ? 0 : e.drafts_retained}
+                </td>
+                <td key={uuidv4()}>
+                  {e.drafts_remaining === null ? 0 : e.drafts_remaining}
+                </td>
               </tr>,
             ];
           })}
