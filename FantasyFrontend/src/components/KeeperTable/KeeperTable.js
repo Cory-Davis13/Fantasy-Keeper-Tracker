@@ -8,7 +8,7 @@ const KeeperTable = (props) => {
   const [url, setUrl] = useState("/getData");
 
   useEffect(() => {
-    if (props.yearSearch !== "" || props.teamSearch !== "") {
+    if (props.yearSearch !== "#" && props.teamSearch !== "#") {
       setUrl("/getData/" + props.yearSearch + "/" + props.teamSearch);
     }
   }, [props.yearSearch, props.teamSearch]);
@@ -40,7 +40,7 @@ const KeeperTable = (props) => {
               <tr key={uuidv4()}>
                 <td key={uuidv4()}>{e.manager}</td>
                 <td key={uuidv4()}>{e.player_name}</td>
-                <td key={uuidv4()}>{e.Year}</td>
+                <td key={uuidv4()}>{e.year}</td>
                 <td key={uuidv4()}>
                   {e.drafts_retained === null ? 0 : e.drafts_retained}
                 </td>
