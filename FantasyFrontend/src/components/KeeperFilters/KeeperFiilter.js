@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./KeeperFilter.css";
+import KeeperCreate from "../KeeperCreate/KeeperCreate";
 import axios from "axios";
 
 const KeeperFilter = (props) => {
@@ -46,6 +47,7 @@ const KeeperFilter = (props) => {
           })}
         </select>
       </div>
+      <KeeperCreate />
     </div>
   );
 };
