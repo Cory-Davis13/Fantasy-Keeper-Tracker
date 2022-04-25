@@ -24,7 +24,12 @@ const KeeperFilter = (props) => {
   return (
     <div className="ddl-container">
       <div className="ddlStyle">
-        <select defaultValue="#" onChange={handleChange} id="ft-year-select">
+        <select
+          className="ddlSelect"
+          defaultValue="#"
+          onChange={handleChange}
+          id="ft-year-select"
+        >
           <option disabled value="#">
             Select a Year
           </option>
@@ -34,7 +39,12 @@ const KeeperFilter = (props) => {
         </select>
       </div>
       <div className="ddlStyle">
-        <select defaultValue="#" onChange={handleChange} id="ft-team-select">
+        <select
+          className="ddlSelect"
+          defaultValue="#"
+          onChange={handleChange}
+          id="ft-team-select"
+        >
           <option disabled value="#">
             Select a Team
           </option>

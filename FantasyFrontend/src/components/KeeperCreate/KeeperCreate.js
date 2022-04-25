@@ -1,17 +1,23 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import KeeperCreateModal from "../KeeperCreateModal/KeeperCreateModal";
 import "./KeeperCreate.css";
+import { useState } from "react";
 
 const KeeperCreate = () => {
+  const [toggleFlag, setToggleFlag] = useState(false);
   const handleButtonClick = () => {
-    console.log("button clicked!");
+    document.getElementById("form").reset();
+    toggleFlag === false ? setToggleFlag(true) : setToggleFlag(false);
   };
 
   return (
     <>
       <div>
-        <button className="btn-primary" onClick={handleButtonClick}>
-          <FontAwesomeIcon icon={faPlus} />
+        <KeeperCreateModal
+          toggleFlag={toggleFlag}
+          toggleHandler={handleButtonClick}
+        />
+        <button className="btn-add" onClick={handleButtonClick}>
+          &#43;
         </button>
       </div>
     </>

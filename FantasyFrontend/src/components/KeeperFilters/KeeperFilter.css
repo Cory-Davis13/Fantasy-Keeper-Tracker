@@ -8,7 +8,7 @@
 }
 
 .ddlStyle select {
-  background-color: #9c963e;
+  background-color: #ccc453;
   color: black;
   padding: 12px;
   width: 250px;
@@ -20,9 +20,8 @@
   outline: none;
 }
 
-.ddlStyle:hover::before {
-  color: rgba(255, 255, 255, 0.6);
-  background-color: rgba(255, 255, 255, 0.2);
+.ddlSelect:hover {
+  background-color: #e7e077;
 }
 
 .ddlStyle select option {

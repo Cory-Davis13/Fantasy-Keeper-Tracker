@@ -1,5 +1,14 @@
-.btn-primary {
+.btn-add {
   background-color: transparent;
   border: none;
-  color: white;
+  color: #aaaaaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.btn-add:hover,
+.btn-add:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
