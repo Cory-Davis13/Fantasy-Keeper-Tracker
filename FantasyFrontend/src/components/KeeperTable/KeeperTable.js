@@ -9,7 +9,7 @@ const KeeperTable = (props) => {
 
   useEffect(() => {
     if (props.yearSearch !== "#" && props.teamSearch !== "#") {
-      setUrl("/getData/" + props.yearSearch + "/" + props.teamSearch);
+      setUrl(`/getData/${props.yearSearch}/${props.teamSearch}`);
     }
   }, [props.yearSearch, props.teamSearch]);
 

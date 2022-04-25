@@ -1,26 +1,49 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 let config = require("./config.js");
 const mysql = require("mysql2");
 
 const app = express();
 const port = 5000;
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
+
 const connection = mysql.createConnection(config);
 
 app.get("/", (req, res) => {});
 
 //CREATE ROUTES
-app.post("/addPlayer/:year/:manager/:player/:retained/:remain", (req, res) => {
+app.post("/addPlayer", (req, res) => {
   let sql = `CALL createPlayerRecord(?,?,?,?,?)`;
-  console.log(req);
-  const param1 = req.params.year;
-  const param2 = req.params.manager;
-  const param3 = req.params.player;
-  const param4 = req.params.retained;
-  const param5 = req.params.remain;
+  const year = req.body.year;
+  const manager = req.body.manager;
+  const player = req.body.player;
+  const retained = req.body.retain;
+  const remain = req.body.remain;
   connection.query(
     sql,
-    [param1, param2, param3, param4, param5],
+    [year, manager, player, retained, remain],
+    (error, results, fields) => {
+      if (error) {
+        return console.error(error.message);
+      }
+      res.send("record added!");
+    }
+  );
+});
+
+app.post("/testRoute", (req, res) => {
+  let sql = `CALL createPlayerRecord(?,?,?,?,?)`;
+  const year = req.body.year;
+  const manager = req.body.manager;
+  const player = req.body.player;
+  const retained = req.body.retain;
+  const remain = req.body.remain;
+  connection.query(
+    sql,
+    [year, manager, player, retained, remain],
     (error, results, fields) => {
       if (error) {
         return console.error(error.message);
