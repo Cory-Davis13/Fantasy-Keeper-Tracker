@@ -9,21 +9,7 @@ const KeeperCreateModal = (props) => {
     e.target.value !== "" ? setInputFilled(true) : setInputFilled(false);
   };
 
-  function playerFormat(e) {
-    e.preventDefault();
-    const p = document.getElementById("player").value;
-    return p.replace(/\s/g, "%20");
-  }
-
   return (
-    // <div
-    //   id="myModal"
-    //   className={props.toggleFlag === false ? "modal close" : "modal open"}
-    // >
-    //   <div className="modal-content">
-    //     <span onClick={props.toggleHandler} className="close-btn">
-    //       &times;
-    //     </span>
     <Modal toggleFlag={props.toggleFlag} toggleHandler={props.toggleHandler}>
       <form id="form" method="POST" action="/addPlayer">
         <span className="u-h1">Add a Keeper</span>
@@ -120,18 +106,11 @@ const KeeperCreateModal = (props) => {
             </label>
           </div>
         </div>
-        <button
-          className="btn-primary"
-          onSubmit={playerFormat}
-          type="submit"
-          id="btn-submit"
-        >
+        <button className="btn-primary" type="submit" id="btn-submit">
           Submit
         </button>
       </form>
     </Modal>
-    //</div>
-    //</div>
   );
 };
 

@@ -15,12 +15,21 @@ const App = () => {
     setSelectedTeam(team);
   };
 
+  const successMessage = () => {
+    return (
+      <div id="success-msg">
+        <h1>Form Submitted!</h1>
+      </div>
+    );
+  };
+
   return (
     <div>
       <KeeperFilter
         handleSelectedYear={yearHandler}
         handleSelectedTeam={teamHandler}
       />
+      {document.location.pathname.includes("success") && successMessage()}
       <KeeperTable yearSearch={selectedYear} teamSearch={selectedTeam} />
     </div>
   );
