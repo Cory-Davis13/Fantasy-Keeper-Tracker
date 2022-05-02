@@ -19,7 +19,7 @@ app.post("/addPlayer", (req, res) => {
   let sql = `CALL createPlayerRecord(?,?,?,?,?)`;
   const year = req.body.year;
   const manager = req.body.manager;
-  const player = req.body.player;
+  const player = req.body.player.replace(/\s/g, " ");
   const retained = req.body.retain;
   const remain = req.body.remain;
   connection.query(
@@ -29,28 +29,23 @@ app.post("/addPlayer", (req, res) => {
       if (error) {
         return console.error(error.message);
       }
-      res.send("record added!");
+      res.redirect("/getData/success");
     }
   );
 });
 
-app.post("/testRoute", (req, res) => {
-  let sql = `CALL createPlayerRecord(?,?,?,?,?)`;
+//DELETE ROUTE
+app.post("/deletePlayer", async (req, res) => {
+  let sql = `CALL deletePlayerRecord(?,?,?)`;
   const year = req.body.year;
   const manager = req.body.manager;
-  const player = req.body.player;
-  const retained = req.body.retain;
-  const remain = req.body.remain;
-  connection.query(
-    sql,
-    [year, manager, player, retained, remain],
-    (error, results, fields) => {
-      if (error) {
-        return console.error(error.message);
-      }
-      res.send("record added!");
+  const player = req.body.player.replace(/\s/g, " ");
+  connection.query(sql, [year, manager, player], (error, results, fields) => {
+    if (error) {
+      return console.error(error.message);
     }
-  );
+    res.redirect("/getData/" + year + "/" + manager);
+  });
 });
 
 //READ ROUTES
