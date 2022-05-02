@@ -2,10 +2,12 @@ import { useState, useEffect, useMemo, forwardRef, useRef } from "react";
 import axios from "axios";
 import { useSortBy, useTable, useRowSelect } from "react-table";
 import "./KeeperTable.css";
+import SuccessMessage from "../UI/SuccessMessage";
 
 const KeeperTable = (props) => {
   const [playersList, setPlayersList] = useState([]);
   const [url, setUrl] = useState("/getData");
+  const [deleteSucces, setDeleteSuccess] = useState(false);
   const deleteUrl = useRef("/getData");
 
   const data = useMemo(() => playersList, [playersList]);
@@ -64,7 +66,6 @@ const KeeperTable = (props) => {
     let player = "";
     let year = "";
 
-    //Gets the data from selected row
     let rows = document.getElementsByName("myCheckbox");
     for (let row of rows) {
       row.checked && checkedCount++;
@@ -79,7 +80,6 @@ const KeeperTable = (props) => {
       }
     }
 
-    //if more than one row is selected stop, else make the call to deletePlayerRecord
     if (checkedCount >= 2 || checkedCount <= 0) {
       console.log("only delete one record at a time!");
     } else {
@@ -92,16 +92,17 @@ const KeeperTable = (props) => {
           })
           .then((res) => {});
       }
-      //call the function then update the state which should refresh the table. url variable has a useEffect that updates the playersList date which in turn has a
-      //use effect to make a new axios call and get the proper data.
       deletePlayerRecord();
       deleteUrl.current = `/getData/${year}/${manager}`;
       async function updateTableAfterDelete() {
         axios.get(deleteUrl.current).then((res) => {
           setPlayersList(res.data);
+          setDeleteSuccess(true);
         });
       }
       updateTableAfterDelete();
+
+      return <SuccessMessage />;
     }
   };
 
@@ -115,7 +116,6 @@ const KeeperTable = (props) => {
       useRowSelect,
       (hooks) => {
         hooks.visibleColumns.push((columns) => [
-          // Let's make a column for selection
           {
             id: "selection",
             Header: ({ getToggleAllRowsSelectedProps }) => (
@@ -125,8 +125,6 @@ const KeeperTable = (props) => {
                 </button>
               </div>
             ),
-            // The cell can use the individual row's getToggleRowSelectedProps method
-            // to the render a checkbox
             Cell: ({ row }) => (
               <div>
                 <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
@@ -155,6 +153,7 @@ const KeeperTable = (props) => {
 
   return (
     <div className="flex">
+      {deleteSucces === true && <SuccessMessage />}
       <table id="keepers" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (

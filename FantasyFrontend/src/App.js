@@ -1,5 +1,6 @@
 import KeeperTable from "./components/KeeperTable/KeeperTable";
 import KeeperFilter from "./components/KeeperFilters/KeeperFiilter";
+import SuccessMessage from "./components/UI/SuccessMessage";
 import { useState } from "react";
 import "./App.css";
 
@@ -15,21 +16,13 @@ const App = () => {
     setSelectedTeam(team);
   };
 
-  const successMessage = () => {
-    return (
-      <div id="success-msg">
-        <h1>Form Submitted!</h1>
-      </div>
-    );
-  };
-
   return (
     <div>
       <KeeperFilter
         handleSelectedYear={yearHandler}
         handleSelectedTeam={teamHandler}
       />
-      {document.location.pathname.includes("success") && successMessage()}
+      {document.location.pathname.includes("success") && <SuccessMessage />}
       <KeeperTable yearSearch={selectedYear} teamSearch={selectedTeam} />
     </div>
   );
